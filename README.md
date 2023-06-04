@@ -64,7 +64,7 @@ Flags:
 go-bindata -o=./public/bindata_config.go -pkg=public config.yml
 ```
 
-然后更改 `public/config.go` 中的配置信息读取方式，接着进入开发即可。
+然后更改 [public/config.go](https://github.com/eryajf/eryajfctl/blob/4cd30714062e5b65746bdb5f100f19bfe38ed52e/public/config.go#L28) 中的配置信息读取方式，接着进入开发即可。
 
 如果后续本地的config.yml配置有更新，则再次执行上边的命令，将配置文件注入到 `bindata_config.go` 即可。
 
@@ -74,12 +74,12 @@ go-bindata -o=./public/bindata_config.go -pkg=public config.yml
 
 此框架建立在如下几个优秀的考原项目之上：
 
-- [github.com/spf13/cobra v1.2.1](https://github.com/spf13/cobra)
 - [gopkg.in/yaml.v3 v3.0.1](https://github.com/go-yaml/yaml)
+- [github.com/spf13/cobra v1.2.1](https://github.com/spf13/cobra)
 
 ## 其他参考
 
 如果你想熟悉了解此框架的详细用法，还可以参考我的如下两篇文章：
 
-- [利用cobra库快速开发类似kubectl一样的命令行工具](https://wiki.eryajf.net/pages/5c4163/)
 - [使用go-bindata将文件编译进二进制](https://wiki.eryajf.net/pages/2bf6c3/)
+- [利用cobra库快速开发类似kubectl一样的命令行工具](https://wiki.eryajf.net/pages/5c4163/)

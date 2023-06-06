@@ -72,7 +72,7 @@ go-bindata -o=./public/bindata_config.go -pkg=public config.yml
 
 ## 感谢开源
 
-此框架建立在如下几个优秀的考原项目之上：
+此框架建立在如下几个优秀的开源项目之上：
 
 - [gopkg.in/yaml.v3 v3.0.1](https://github.com/go-yaml/yaml)
 - [github.com/spf13/cobra v1.2.1](https://github.com/spf13/cobra)

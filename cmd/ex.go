@@ -22,8 +22,8 @@ import (
 
 // exCmd represents the jenkins command
 var exCmd = &cobra.Command{
-	Use:  "ex",
-	Long: `这是一个示例,你可以参考帮助信息使用`,
+	Use:   "ex",
+	Short: `这是一个示例,你可以参考帮助信息使用,见: https://github.com/eryajf/eryajfctl/blob/main/README.md`,
 }
 
 func init() {

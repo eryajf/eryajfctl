@@ -9,7 +9,7 @@
 
 <p> 🌉 基于Cobra库快速开发类似kubectl一样的命令行工具框架 🌉</p>
 
-<img src="https://camo.githubusercontent.com/82291b0fe831bfc6781e07fc5090cbd0a8b912bb8b8d4fec0696c881834f81ac/68747470733a2f2f70726f626f742e6d656469612f394575424971676170492e676966" width="800"  height="3">
+<img src="https://cdn.jsdelivr.net/gh/eryajf/tu@main/img/image_20240420_214408.gif" width="800"  height="3">
 
 </div>
 
@@ -69,6 +69,16 @@ go-bindata -o=./public/bindata_config.go -pkg=public config.yml
 如果后续本地的config.yml配置有更新，则再次执行上边的命令，将配置文件注入到 `bindata_config.go` 即可。
 
 这样做的一个好处是，你的二进制放到服务器等地运行的时候，既不需要添加config.yml文件，也能防止文件中的敏感信息暴漏出去。
+
+## 生成文档
+
+执行如下命令，会自动生成该工具的文档，且生成子命令的文档。
+
+```
+$ ./eryajfctl --md-docs
+```
+
+在这里你可以看到所有的文档：[点我查看](./docs/eryajfctl.md)
 
 ## 感谢开源
 

@@ -22,7 +22,7 @@ env:
   DOCKERHUB_USERNAME: eryajf
   ALIHUB_URL: registry.cn-hangzhou.aliyuncs.com
   ALIHUB_USERNAME: eryajf
-  ALIHUB_IMAGE_REPONAME: eryajfctl
+  ALIHUB_IMAGE_REPONAME: eryajf
   IMAGE_REPONAME: eryajfctl
 
 jobs:

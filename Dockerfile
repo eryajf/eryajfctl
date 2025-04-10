@@ -1,6 +1,6 @@
 FROM alpine:3.21
 
-LABEL maintainer eryajf
+LABEL maintainer=eryajf
 
 ENV TZ=Asia/Shanghai
 ENV BINARY_NAME=eryajfctl
@@ -13,7 +13,7 @@ RUN sed -i "s/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g" /etc/apk/repositories
 ARG TARGETOS
 ARG TARGETARCH
 
-COPY config.example.yml ~/.config.yml
+COPY config.example.yml /etc/${BINARY_NAME}/config.yml
 COPY bin/${BINARY_NAME}_${TARGETOS}_${TARGETARCH} /usr/local/bin/${BINARY_NAME}
 
 RUN chmod +x /usr/local/bin/${BINARY_NAME}

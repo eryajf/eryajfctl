@@ -23,7 +23,7 @@ func LoadConfig() *Configuration {
 		// 从文件中读取
 		config = &Configuration{}
 		// 默认从~/.config.yml 读取，如果读不到，则从当前目录下 config.yml 读取
-		data, err := os.ReadFile(os.ExpandEnv("$HOME/.config.yml"))
+		data, err := os.ReadFile(os.ExpandEnv("/etc/eryajfctl/config.yml"))
 		if err != nil {
 			data, err = os.ReadFile("config.yml")
 			if err != nil {

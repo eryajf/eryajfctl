@@ -31,7 +31,7 @@ lint:
 
 .PHONY: gox-linux
 gox-linux:
-	gox -osarch="linux/amd64 linux/arm64" -ldflags=${LDFLAGS} -output="${OUTPUT_DIR}/${BINARY_NAME}_{{.OS}}_{{.Arch}}"
+	CGO_ENABLED=0 gox -osarch="linux/amd64 linux/arm64" -ldflags=${LDFLAGS} -output="${OUTPUT_DIR}/${BINARY_NAME}_{{.OS}}_{{.Arch}}"
 	@for b in $$(ls ${OUTPUT_DIR}); do \
 		OUTPUT_FILE="${OUTPUT_DIR}/$$b"; \
 		upx -9 -q "$$OUTPUT_FILE"; \
@@ -39,7 +39,7 @@ gox-linux:
 
 .PHONY: gox-all
 gox-all:
-	gox -osarch="darwin/amd64 darwin/arm64 linux/amd64 linux/arm64 linux/ppc64le windows/amd64" -ldflags=${LDFLAGS} -output="${OUTPUT_DIR}/${BINARY_NAME}_{{.OS}}_{{.Arch}}"
+	CGO_ENABLED=0 gox -osarch="darwin/amd64 darwin/arm64 linux/amd64 linux/arm64 linux/ppc64le windows/amd64" -ldflags=${LDFLAGS} -output="${OUTPUT_DIR}/${BINARY_NAME}_{{.OS}}_{{.Arch}}"
 	@for b in $$(ls ${OUTPUT_DIR}); do \
 		FILENAME=$$(basename -s .exe "$$b"); \
 		GOOS=$$(echo "$$FILENAME" | rev | cut -d'_' -f2 | rev); \
@@ -65,7 +65,7 @@ clean:
 help:
 	@echo "参数:"
 	@echo "  build       为当前平台构建可执行文件"
-	@echo "  build-linux 为Linux平台构建可执行文件"
+	@echo "  gox-linux   为Linux平台构建可执行文件"
 	@echo "  gox-all     为所有平台构建可执行文件"
 	@echo "  clean       清理生成的可执行文件"
 	@echo "  lint        代码格式检查"

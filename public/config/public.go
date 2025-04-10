@@ -1,4 +1,4 @@
-package public
+package config
 
 var Config *Configuration
 

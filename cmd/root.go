@@ -18,21 +18,32 @@ package cmd
 import (
 	"fmt"
 	"os"
+	"runtime"
 
 	"github.com/spf13/cobra"
 	"github.com/spf13/cobra/doc"
 )
 
 // var cfgFile string
+var (
+	Version   string
+	GitCommit string
+	BuildTime string
+)
 
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
 	Use:   "eryajfctl",
 	Short: "eryajf goscript",
 	Long:  `利用cobra制作运维日常工具箱的框架。`,
-	// Uncomment the following line if your bare application
-	// has an action associated with it:
-	// Run: func(cmd *cobra.Command, args []string) { },
+	Run: func(cmd *cobra.Command, args []string) {
+		// 检查是否有 -v 参数
+		if versionFlag, _ := cmd.Flags().GetBool("version"); versionFlag {
+			fmt.Println(cmd.VersionTemplate())
+			return
+		}
+		cmd.Help()
+	},
 }
 
 // Execute adds all child commands to the root command and sets flags appropriately.
@@ -44,7 +55,16 @@ func Execute() {
 func init() {
 	rootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 	rootCmd.Flags().BoolVarP(&MarkdownDocs, "md-docs", "m", false, "gen Markdown docs")
+	rootCmd.Version = Version
+	rootCmd.SetVersionTemplate(fmt.Sprintf(`{{with .Name}}{{printf "%%s version information: " .}}{{end}}
+  {{printf "Version:    %%s" .Version}}
+  Git Commit: %s
+  Go version: %s
+  OS/Arch:    %s/%s
+  Build Time: %s
 
+  `, GitCommit, runtime.Version(), runtime.GOOS, runtime.GOARCH, BuildTime))
+	rootCmd.Flags().BoolP("version", "v", false, "Show version information")
 }
 
 var MarkdownDocs bool
@@ -56,4 +76,9 @@ func GenDocs() {
 			os.Exit(1)
 		}
 	}
+}
+
+// 生成配置文件
+func GenConfig() {
+
 }

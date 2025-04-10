@@ -1,23 +1,19 @@
-FROM golang:1.18.10-alpine3.16 AS builder
+FROM alpine:3.21
 
-ENV GOPROXY      https://goproxy.io
+LABEL maintainer eryajf
 
-RUN mkdir /app
-ADD . /app/
-WORKDIR /app
-RUN go build -o eryajfctl .
+ENV TZ=Asia/Shanghai
+ENV BINARY_NAME=eryajfctl
 
-FROM alpine:3.16
+RUN sed -i "s/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g" /etc/apk/repositories \
+    && apk upgrade \
+    && apk add bash curl wget alpine-conf busybox-extras tzdata \
+    && apk del alpine-conf && rm -rf /var/cache/*
 
-ARG TZ="Asia/Shanghai"
+ARG TARGETOS
+ARG TARGETARCH
 
-ENV TZ ${TZ}
+COPY config.example.yml ~/.config.yml
+COPY bin/${BINARY_NAME}_${TARGETOS}_${TARGETARCH} /usr/local/bin/${BINARY_NAME}
 
-RUN mkdir /app && apk upgrade \
-    && apk add bash tzdata \
-    && ln -sf /usr/share/zoneinfo/${TZ} /etc/localtime \
-    && echo ${TZ} > /etc/timezone
-
-WORKDIR /app
-COPY --from=builder /app/ .
-RUN chmod +x eryajfctl && cp config.example.yml config.yml
+RUN chmod +x /usr/local/bin/${BINARY_NAME}

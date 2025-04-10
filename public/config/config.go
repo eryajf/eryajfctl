@@ -1,11 +1,10 @@
-package public
+package config
 
 import (
-	"io/ioutil"
-	"log"
 	"os"
 	"sync"
 
+	"github.com/eryajf/eryajfctl/public/logger"
 	"gopkg.in/yaml.v3"
 )
 
@@ -23,15 +22,22 @@ func LoadConfig() *Configuration {
 	once.Do(func() {
 		// 从文件中读取
 		config = &Configuration{}
-		data, err := ioutil.ReadFile("config.yml")
+		// 默认从~/.config.yml 读取，如果读不到，则从当前目录下 config.yml 读取
+		data, err := os.ReadFile(os.ExpandEnv("$HOME/.config.yml"))
+		if err != nil {
+			data, err = os.ReadFile("config.yml")
+			if err != nil {
+				logger.Fatal(err)
+			}
+		}
 		// 此处如果使用go-bindata将本地配置文件转成二进制，那么使用如下代码读取配置文件
 		// data, err := Asset("config.yml")
 		if err != nil {
-			log.Fatal(err)
+			logger.Fatal(err)
 		}
 		err = yaml.Unmarshal(data, &config)
 		if err != nil {
-			log.Fatal(err)
+			logger.Fatal(err)
 		}
 
 		// 如果环境变量有配置，读取环境变量

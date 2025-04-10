@@ -17,11 +17,13 @@ package main
 
 import (
 	"github.com/eryajf/eryajfctl/cmd"
-	"github.com/eryajf/eryajfctl/public"
+	"github.com/eryajf/eryajfctl/public/config"
+	"github.com/eryajf/eryajfctl/public/logger"
 )
 
 func init() {
-	public.InitSvc()
+	logger.InitLogger("debug")
+	config.InitSvc()
 }
 
 func main() {

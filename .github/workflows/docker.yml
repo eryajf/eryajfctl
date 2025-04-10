@@ -27,7 +27,6 @@ env:
 
 jobs:
   buildImage:
-    needs: buildx
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -39,7 +38,6 @@ jobs:
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
       - name: Set up Docker Buildx
-        id: buildx
         uses: docker/setup-buildx-action@v2
       - name: Available platforms
         run: echo ${{ steps.buildx.outputs.platforms }}

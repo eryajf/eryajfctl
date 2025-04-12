@@ -53,7 +53,6 @@ func Execute() {
 }
 
 func init() {
-	rootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 	rootCmd.Flags().BoolVarP(&MarkdownDocs, "md-docs", "m", false, "gen Markdown docs")
 	rootCmd.Version = Version
 	rootCmd.SetVersionTemplate(fmt.Sprintf(`🍉 {{with .Name}}{{printf "%%s version information: " .}}{{end}}

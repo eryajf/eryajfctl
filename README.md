@@ -86,7 +86,8 @@ $ ./eryajfctl --md-docs
 此框架建立在如下几个优秀的开源项目之上：
 
 - [gopkg.in/yaml.v3 v3.0.1](https://github.com/go-yaml/yaml)
-- [github.com/spf13/cobra v1.2.1](https://github.com/spf13/cobra)
+- [github.com/spf13/cobra v1.9.1](https://github.com/spf13/cobra)
+- [github.com/spf13/viper v1.20.1](https://github.com/spf13/viper)
 
 ## 其他参考
 
@@ -94,6 +95,7 @@ $ ./eryajfctl --md-docs
 
 - [使用go-bindata将文件编译进二进制](https://wiki.eryajf.net/pages/2bf6c3/)
 - [利用cobra库快速开发类似kubectl一样的命令行工具](https://wiki.eryajf.net/pages/5c4163/)
+- [近期关于cobra库的一些实践心得总结](https://wiki.eryajf.net/pages/7b8eff/)
 
 ## 项目源码
 

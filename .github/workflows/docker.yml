@@ -62,7 +62,7 @@ jobs:
         uses: crazy-max/ghaction-upx@v3
         with:
           install-only: true
-      - run: go install github.com/mitchellh/gox@latest # setup gox
+      - run: go install github.com/authelia/gox@latest # setup gox
       - run: make gox-linux
 
       - name: Build and push

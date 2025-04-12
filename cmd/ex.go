@@ -5,7 +5,7 @@ Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
-    http://www.apache.org/licenses/LICENSE-2.0
+	http://www.apache.org/licenses/LICENSE-2.0
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,8 +16,11 @@ limitations under the License.
 package cmd
 
 import (
+	"fmt"
+
 	"github.com/eryajf/eryajfctl/api/ex"
 	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
 )
 
 // exCmd represents the jenkins command
@@ -27,10 +30,18 @@ var exCmd = &cobra.Command{
 }
 
 func init() {
+	viper.AutomaticEnv()
+	viper.SetEnvPrefix("PLUGIN")
+	viper.BindEnv("word") // 绑定环境变量 PLUGIN_WORD
+
 	rootCmd.AddCommand(exCmd)
-	// 获取配置文件
 	exCmd.AddCommand(ex.GetConfigCmd)
-	cset := ex.GetConfigCmd.Flags()
-	cset.StringP("word", "w", "你好，这是测试", "测试参数")
-	_ = ex.GetConfigCmd.MarkFlagRequired("word")
+	ex.GetConfigCmd.Flags().StringP("word", "w", viper.GetString("word"), "传入要打印的内容 [$PLUGIN_WORD]")
+	viper.BindPFlag("word", ex.GetConfigCmd.Flags().Lookup("word"))
+	ex.GetConfigCmd.PreRunE = func(cmd *cobra.Command, args []string) error {
+		if viper.GetString("word") == "" {
+			return fmt.Errorf("必须通过环境变量 PLUGIN_WORD 或命令行参数 --word 提供值")
+		}
+		return nil
+	}
 }

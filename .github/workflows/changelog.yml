@@ -1,28 +1,13 @@
 name: Generate changelog
+
 on:
-  # release:
-  #   types: [created, edited, published]
-  pull_request:
-    types: [closed]
-  issues:
-    types: [closed]
-  workflow_run:
-    workflows: ["Create release"]  # release.yml의 name과 일치해야 함
-    types:
-      - completed
+  release:
+    types: [ created, published ] # 表示在创建新的 Release 时触发
   workflow_dispatch:  
-  
-permissions: 
-  contents: write
-  pull-requests: write
 
 jobs:
   generate-changelog:
     runs-on: ubuntu-latest
-    if: |
-      github.event_name == 'workflow_dispatch' ||
-      (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success') ||
-      (github.event_name == 'pull_request' && github.event.pull_request.merged == true)
     steps:
     - uses: actions/checkout@v4
       with:
@@ -40,7 +25,6 @@ jobs:
         issues: true
         pullRequests: true
         includeLabels: "bug,enhancement,feature"
-        simpleList: true
 
     - name: Git Commit and Push
       uses: somaz94/go-git-commit-action@v1

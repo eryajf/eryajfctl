@@ -91,7 +91,7 @@ $ ./eryajfctl --md-docs
 
 ## 其他参考
 
-如果你想熟悉了解此框架的详细用法，还可以参考我的如下两篇文章：
+如果你想熟悉了解此框架的详细用法，还可以参考我的如下三篇文章：
 
 - [使用go-bindata将文件编译进二进制](https://wiki.eryajf.net/pages/2bf6c3/)
 - [利用cobra库快速开发类似kubectl一样的命令行工具](https://wiki.eryajf.net/pages/5c4163/)

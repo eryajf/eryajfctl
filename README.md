@@ -55,6 +55,18 @@ Flags:
   -w, --word string   测试参数 (default "你好，这是测试")
 ```
 
+查看版本：
+
+```
+$ ./eryajfctl -v
+🍉 eryajfctl version information: 
+  Version:    8400fbc
+  Git Commit: 8400fbc
+  Go version: go1.24.2
+  OS/Arch:    linux/amd64
+  Build Time: 2025-04-17 15:18:05
+```
+
 ## 开始开发
 
 你可以直接参考ex参数的流程，开发新的参数，从而满足实际使用需求。
